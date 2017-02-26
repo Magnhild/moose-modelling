@@ -1,4 +1,4 @@
-first_data <- read_excel("~/Master by Bioresearch, MRes/DATA ANALYSIS/R Forsøk/02.02.2017/12_finaldata.xlsx")
+first_data <- read_excel("12_finaldata.xlsx")
 
 moose <- (first_data$Moose_pellet_groups)
 
