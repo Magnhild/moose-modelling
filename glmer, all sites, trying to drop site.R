@@ -207,5 +207,37 @@ r.squaredGLMM(mixed.model9)
 #Two new warning messages!!!! 
 #neither of which is failed to converge!!!
 #praise the stats gods 
-#R2 is high, but still identical though
+#R2 is 0.13, but still identical though
 #so the PROBLEM is still there, but at least there are new warnings 
+
+#finally I am going to drop the quadrat name and see what happens to the R2
+
+IND <- factor(1:nrow(first_data))
+mixed.model11 <- glmer(moose ~ area + biomass + hunting + psy + veg + class + wolf + acc + accpsy + species + trees + (1|IND), data=first_data, family = poisson)
+anova (mixed.model11)
+
+r.squaredGLMM(mixed.model11)
+
+#So the mdoel still works when I drop quadrat as a nesting variable
+#and the R2 goes from 0.13 to 0.71, but is still identical in r2m and r2c
+#I have no idea what this means 
+
+# now, just cuz, i am trying to add both quadrats and sites again to see how the r2 changes
+
+IND <- factor(1:nrow(first_data))
+mixed.model12 <- glmer(moose ~ area + biomass + hunting + psy + veg + class + wolf + acc + accpsy + species + trees + (1|IND) + (1|Site/Quadrat_name), data=first_data, family = poisson)
+anova (mixed.model12)
+
+r.squaredGLMM(mixed.model12)
+
+#r2 is .24
+# now let's try it with just site
+
+IND <- factor(1:nrow(first_data))
+mixed.model13 <- glmer(moose ~ area + biomass + hunting + psy + veg + class + wolf + acc + accpsy + species + trees + (1|IND) + (1|Site), data=first_data, family = poisson)
+anova (mixed.model13)
+
+r.squaredGLMM(mixed.model13)
+
+#r2 is 0.13 again. 
+#cool 

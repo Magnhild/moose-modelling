@@ -44,10 +44,17 @@ summary(linear.model2)
 linear.model3 <- step(linear.model2)
 anova(linear.model3)
 
-summary(linear.model3)
+linear.model4 <- glm(moose ~ site/quadrat + veg + class + dominant + acc + trees + altitude, data=first_data, family = poisson)
+
+anova(linear.model3,linear.model4, test="Chisq")
+anova(linear.model4)
+summary(linear.model4)
+
+#adding this 21.02.2017: chi square test the model to get p vaules 
+anova(linear.model3, test="Chisq")
 
 #R^2 for this moedl is 0.34 
-#Now we remove site and try again
+#Now we remove site and quadrat and try again
 
 linear.model4 <- glm(moose ~ house + veg + class + dominant + acc + trees + altitude, data=first_data, family = poisson)
 anova(linear.model4)
